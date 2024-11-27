@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mock_apps/const.dart';
+import 'package:mock_apps/ui/home/catalog_screen.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -89,7 +90,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       TextFormField(
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Please enter Email';
+                            return 'Email is required';
+                          }
+                          if (!value.endsWith("@gmail.com")) { // menggunakan bank operator untuk kebalikan
+                            return 'Please fill with valid email';
                           }
                           return null;
                         },
@@ -119,10 +123,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       // password
                       TextFormField(
                         obscureText: true,
-                        obscuringCharacter: '*',
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Please enter Password';
+                            return 'Password is required';
                           }
                           return null;
                         },
@@ -188,15 +191,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 agreePersonalData) {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
-                                  content: Text('Processing Data'),
+                                  content: Text('Registration Successful '),
                                 ),
                               );
-                            } else if (!agreePersonalData) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                    content: Text(
-                                        'Please agree to the processing of personal data')),
-                              );
+                            // Menunggu SnackBar ditampilkan sebelum melakukan navigasi
+                                  Future.delayed(const Duration(seconds: 1), () {
+                                    Navigator.pushReplacement(
+                                      context, 
+                                      MaterialPageRoute(builder: (context) => const CatalogScreen())
+                                    );
+                             });
                             }
                           },
                           child: const Text('Sign up'),

@@ -6,7 +6,7 @@ class ItemsCard extends StatelessWidget {
   const ItemsCard({super.key, required this.product, required this.press});
 
   final Product product;
-  final VoidCallback press;
+  final VoidCallback press; // sebuah method
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +22,9 @@ class ItemsCard extends StatelessWidget {
                 color: product.color,
                 borderRadius: BorderRadius.circular(16)
               ),
-              child: Hero( //efek trasisi keren ke detail page (animasi transisi antar layar)
+              child: Hero( // Efek trasisi keren ke detail page (animasi transisi antar layar)
                 tag: "${product.id}", // untuk mendefinisikan tiap product, buat ambil id
-                child: Image.asset(product.image) // ini buat isian nya
+                child: Image.asset(product.image) // ini buat isiannya
               ),
             ),
           ),
@@ -38,7 +38,7 @@ class ItemsCard extends StatelessWidget {
           ),
           const SizedBox(height: 5),
           Text(
-            product.getFormattedPrice() //Menggunakan metode untuk mendapatkan harga terformat
+            product.getFormattedPrice() // Menggunakan metode untuk mendapatkan harga terformat
           )
         ],
       ),

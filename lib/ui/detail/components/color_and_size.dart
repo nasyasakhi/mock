@@ -44,7 +44,7 @@ class ColorAndSize extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text(
-                "SIze",
+                "Size",
                 style: TextStyle(color: textColor),
               ),
               RichText( //RichText untuk text yang punya tema terang dan gelap

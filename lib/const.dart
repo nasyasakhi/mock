@@ -10,8 +10,6 @@ const primaryGradietColor = LinearGradient(colors: [
 
 // A secondary color definition
 const secondaryColor = Color(0xFF979797);
-const tertiaryColor = Color(0xFFFF55A7);
-const additionalColor = Color(0xFFB4FF01);
 const textColor = Color(0xFF757575);
 
 // animationDuration time definition

@@ -15,6 +15,7 @@ class DetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    int quantity = 1;
 
     final Size size = MediaQuery.of(context).size;
 
@@ -25,8 +26,8 @@ class DetailScreen extends StatelessWidget {
         elevation: 0,
         actions: [
           IconButton(
+            icon: const Icon(Icons.favorite_border_outlined),
             onPressed: () {},
-            icon: const Icon(Icons.search),
           ),
           IconButton(
             onPressed: () {},
@@ -64,15 +65,15 @@ class DetailScreen extends StatelessWidget {
                         const SizedBox(height: defaultPadding),
                         Description(product: product),
                         const SizedBox(height: 20),
-                        const Row(
+                        Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            CartCounter(),
-                            FavButton()
+                            CartCounter(product: product),
+                            FavButton(product: product)
                           ],
                         ),
                         const SizedBox(height: 20),
-                        AddToCart(product: product),
+                        AddToCart(product: product, quantity: quantity),
                       ],
                     ),
                   ),

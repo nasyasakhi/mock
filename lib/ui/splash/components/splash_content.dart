@@ -12,7 +12,7 @@ class SplashContent extends StatelessWidget {
     return Column( // tidak memakai scaffold karena ini isinya, kanvasnya berada pada splash_screen
       children: [
         const Spacer(), // membuat jarak antar widget
-        Image.asset(   // memasukkan image
+        Image.asset(   //  memasukkan image
           image,
           height: 350,
           width: 350,

@@ -43,7 +43,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       const Text(
-                        'Welcome back',
+                        'Welcome back !',
                         style: TextStyle(
                           fontSize: 30.0,
                           fontWeight: FontWeight.w900,
@@ -56,7 +56,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       TextFormField(
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Please enter Email';
+                            return 'Email is required';
+                          }
+                          if (!value.endsWith("@gmail.com")) {
+                            return 'Please fill with valid email';
                           }
                           return null;
                         },
@@ -85,10 +88,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       TextFormField(
                         obscureText: true,
-                        obscuringCharacter: '*',
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Please enter Password';
+                            return 'Password is required';
                           }
                           return null;
                         },

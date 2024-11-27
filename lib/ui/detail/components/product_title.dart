@@ -63,7 +63,7 @@ class ProductTitle extends StatelessWidget {
                   product.image,
                   width: size.width * imageWidthRatio, 
                   height: size.height * imageHeightRatio, 
-                  fit: BoxFit.cover 
+                  fit: BoxFit.contain
                 ),
               ),
             ],

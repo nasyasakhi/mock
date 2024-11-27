@@ -10,7 +10,7 @@ class Categories extends StatefulWidget {
 
 class _CategoriesState extends State<Categories> {
 
-   List<Map<String, dynamic>> categories = [
+   List<Map<String, dynamic>> categories = [ //view pager
     {"icon": Icons.remove_red_eye, "text": "Ray-Ban"},
     {"icon": Icons.camera, "text": "Prada"},
     {"icon": Icons.lightbulb, "text": "Persol"},
@@ -35,7 +35,6 @@ class _CategoriesState extends State<Categories> {
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
-                  color: textColor,
                 ),
               ),
               GestureDetector(
@@ -43,7 +42,7 @@ class _CategoriesState extends State<Categories> {
                 child: const Text(
                   "view all",
                   style: TextStyle(
-                    color: Color(0xFF236A91),
+                    color: primaryColor,
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                   ),
@@ -52,7 +51,7 @@ class _CategoriesState extends State<Categories> {
             ],
           ),
           const SizedBox(height: defaultPadding), // Memberikan sedikit jarak
-
+         
           // Horizontal list of categories with icons
           SizedBox(
             height: 65, // Atur tinggi untuk ikon dan teks

@@ -54,8 +54,8 @@ class _BodyState extends State<Body> {
                       currentPage = value;
                     });
                   },
-                  itemCount: splashData.length,
-                  itemBuilder: (context, index) => SplashContent(
+                  itemCount: splashData.length, // length u/ memberi tahu berapa array nya
+                  itemBuilder: (context, index) => SplashContent( // jembatan antara data dan ui
                     text  : splashData[index]["text"]!,
                     image : splashData[index]["image"]!
                 )
@@ -63,7 +63,7 @@ class _BodyState extends State<Body> {
             )
           ),
 
-          Expanded(
+          Expanded( // untuk memanfaatkan ruang kosong (proporsional)
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
                 children: List.generate( 
@@ -120,7 +120,7 @@ class _BodyState extends State<Body> {
       margin: const EdgeInsets.only(right: 10),
       decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(5),
-      color: currentPage == index ? primaryColor : secondaryColor, 
+      color: currentPage == index ? primaryColor : secondaryColor, // one line if else condition ( Ternary Operator )
       ),
       width: currentPage == index ? 20 : 7, 
       height: 5, 

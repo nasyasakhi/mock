@@ -20,6 +20,10 @@ class BottomNavBar extends StatelessWidget {
           label: 'Wishlist'
         ),
         BottomNavigationBarItem(
+          icon: Icon(Icons.shopping_bag_outlined),
+          label: 'Cart'
+        ),
+        BottomNavigationBarItem(
           icon: Icon(Icons.settings),
           label: 'Settings'
         ),
@@ -30,6 +34,7 @@ class BottomNavBar extends StatelessWidget {
       ],
       currentIndex: selectedIndex,
       selectedItemColor: primaryColor,
+      unselectedItemColor: const Color(0xFF987EFF), 
       onTap: onItemTapped,
     );
   }

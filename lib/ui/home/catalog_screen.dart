@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mock_apps/const.dart';
 import 'package:mock_apps/models/products.dart';
 import 'package:mock_apps/settings/setting_screen.dart';
+import 'package:mock_apps/ui/cart/cart_screen.dart';
 import 'package:mock_apps/ui/detail/detail_screen.dart';
 import 'package:mock_apps/ui/home/components/bottom_nav_bar.dart';
 import 'package:mock_apps/ui/home/components/categories.dart';
@@ -25,29 +26,21 @@ class _CatalogScreenState extends State<CatalogScreen> {
   ];
 
   int _selectedIndex = 0;
-  bool _isDarkTheme = false; // Untuk menyimpan status tema
 
-  // Widget options yang termasuk SettingsScreen
+  // Daftar tampilan tab
   List<Widget> get _widgetOptions {
     return [
       const CatalogScreen(),
       const WhishlistScreen(),
-      SettingsScreen(
-        isDarkTheme: _isDarkTheme,
-        onThemeChanged: _onThemeChanged,
-      ),
+      const CartScreen(),
+      const SettingsScreen(),
       const ProfileScreen(),
     ];
   }
 
-  // Fungsi untuk menangani perubahan tema
-  void _onThemeChanged(bool isDark) {
-    setState(() {
-      _isDarkTheme = isDark;
-    });
-  }
-
+  // function untuk aksi tap pada bottom navbar
   void _onItemTapped(int index) {
+    // menyatakan bahwa inisial action untuk objek (bottom nav) pada index ke-0
     setState(() {
       _selectedIndex = index;
     });
@@ -58,7 +51,7 @@ class _CatalogScreenState extends State<CatalogScreen> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
         elevation: 0,
         title: const Row(
           children: [
@@ -74,7 +67,7 @@ class _CatalogScreenState extends State<CatalogScreen> {
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 25,
-                color: Colors.black,
+                // color: Colors.black,
               ),
             ),
           ],
@@ -101,11 +94,11 @@ class _CatalogScreenState extends State<CatalogScreen> {
                         right: defaultPadding,
                         left: defaultPadding),
                     child: Text(
-                      "New Arrival🔥",
+                      "New Arrivals 😎",
                       style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
-                          color: Colors.black),
+                          ),
                     ),
                   ),
                   // PageView for Header Images
@@ -143,6 +136,17 @@ class _CatalogScreenState extends State<CatalogScreen> {
                     ),
                   ),
                   const Categories(),
+                  const SizedBox(height: defaultPadding),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: defaultPadding),
+                    child: Text(
+                       'Ray-Ban',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                  ),
                   // Bagian GridView
                   Padding(
                     padding:
@@ -157,14 +161,14 @@ class _CatalogScreenState extends State<CatalogScreen> {
                         crossAxisSpacing: defaultPadding,
                         childAspectRatio: 0.75,
                       ),
-                      itemCount: products.length,
+                      itemCount: product.length,
                       itemBuilder: (context, index) => ItemsCard(
-                        product: products[index],
+                        product: product[index],
                         press: () => Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder: (context) =>
-                                DetailScreen(product: products[index]),
+                                DetailScreen(product: product[index]),
                           ),
                         ),
                       ),
@@ -173,7 +177,7 @@ class _CatalogScreenState extends State<CatalogScreen> {
                 ],
               ),
             )
-          : _widgetOptions[_selectedIndex],
+          : _widgetOptions[_selectedIndex], // tampilkan widget berdasarkan index
       bottomNavigationBar: BottomNavBar(
         selectedIndex: _selectedIndex,
         onItemTapped: _onItemTapped,
