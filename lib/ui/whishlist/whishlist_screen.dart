@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:mock_apps/state-management/whishlist_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -26,7 +25,7 @@ class WhishlistScreen extends StatelessWidget {
       body: wishlistProvider.wishlistItem.isEmpty
       ? const Center(
         child: Text(
-                'Your cart is empty!',
+                'Your Wishlist is empty!',
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w500,

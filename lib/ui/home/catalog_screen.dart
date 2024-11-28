@@ -67,7 +67,6 @@ class _CatalogScreenState extends State<CatalogScreen> {
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 25,
-                // color: Colors.black,
               ),
             ),
           ],

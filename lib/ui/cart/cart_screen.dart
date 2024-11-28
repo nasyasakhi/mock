@@ -12,17 +12,15 @@ class CartScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
+         title: const Text(
           'My Cart',
           style: TextStyle(
             fontSize: 24,
-            fontWeight: FontWeight.bold,
+            fontWeight: FontWeight.bold
           ),
-        ),
-        centerTitle: true,
-        backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
-        // foregroundColor: Colors.white,
-        // elevation: 5,
+          ),
+      centerTitle: true,
+      backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
       ),
       body: cartProvider.items.isEmpty
           ? const Center(
@@ -41,79 +39,181 @@ class CartScreen extends StatelessWidget {
                     itemCount: cartProvider.items.length,
                     itemBuilder: (context, index) {
                       final cartItem = cartProvider.items.values.toList()[index];
-                      return Card(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        margin: const EdgeInsets.symmetric(
-                          vertical: 8,
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(
                           horizontal: 16,
+                          vertical: 8,
                         ),
-                        elevation: 4,
-                        child: ListTile(
-                          leading: ClipRRect(
-                            borderRadius: BorderRadius.circular(8),
-                            child: Image.asset(
-                              cartItem.image,
-                              fit: BoxFit.cover,
-                              width: 50,
-                              height: 50,
-                            ),
+                        child: Card(
+                          elevation: 4,  // Adding elevation to the card
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
                           ),
-                          title: Text(
-                            cartItem.title,
-                            style: const TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          subtitle: Text(
-                            "Quantity: ${cartItem.quantity}",
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: Colors.grey[700],
-                            ),
-                          ),
-                          trailing: IconButton(
-                            icon: const Icon(Icons.delete, color: Colors.red),
-                            onPressed: () {
-                              cartProvider.removeItems(cartItem.id);
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text('${cartItem.title} has been removed!'),
-                                  duration: const Duration(seconds: 2),
+                          child: Padding(
+                            padding: const EdgeInsets.all(16),
+                            child: Row(
+                              children: [
+                                // Product Image
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(12),
+                                  child: Image.asset(
+                                    cartItem.image,
+                                    fit: BoxFit.cover,
+                                    width: 80,
+                                    height: 80,
+                                  ),
                                 ),
-                              );
-                            },
+                                const SizedBox(width: 16),
+                                // Product Details
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        cartItem.title,
+                                        style: const TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      const SizedBox(height: 8),
+                                      Text(
+                                        "\$${cartItem.price.toStringAsFixed(2)}",
+                                        style: const TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                          color: primaryColor,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                // Quantity & Remove Button
+                                Column(
+                                  children: [
+                                    // Remove Item Button
+                                    IconButton(
+                                      onPressed: () {
+                                        cartProvider.removeItems(cartItem.id);
+                                        ScaffoldMessenger.of(context).showSnackBar(
+                                          SnackBar(
+                                            content: Text('${cartItem.title} removed!'),
+                                          ),
+                                        );
+                                      },
+                                      icon: const Icon(
+                                        Icons.delete,
+                                        color: Colors.red,
+                                        size: 24,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 8),
+                                    // Quantity Adjust Button
+                                    Container(
+                                      height: 40,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(20),
+                                        color: Colors.white,
+                                        border: Border.all(
+                                          color: primaryColor ),
+                                      ),
+                                      child: Row(
+                                        children: [
+                                          IconButton(
+                                            icon: const Icon(Icons.remove),
+                                            onPressed: () {
+                                              if (cartItem.quantity > 1) {
+                                                cartProvider.removeItems(cartItem.id);
+                                              }
+                                            },
+                                          ),
+                                          Text(
+                                            '${cartItem.quantity}',
+                                            style: const TextStyle(fontSize: 16),
+                                          ),
+                                          IconButton(
+                                            icon: const Icon(Icons.add),
+                                            onPressed: () {
+                                              cartProvider.addItem(
+                                                cartItem.id,
+                                                cartItem.title,
+                                                cartItem.price,
+                                                cartItem.image,
+                                                1,
+                                              );
+                                            },
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       );
                     },
                   ),
                 ),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.2),
-                        blurRadius: 10,
-                        spreadRadius: 5,
-                      ),
-                    ],
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                // Discount Code and Total
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  child: Column(
                     children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      // Discount Code Input
+                      Row(
+                        children: [
+                          Expanded(
+                            child: TextField(
+                              decoration: InputDecoration(
+                                hintText: 'Enter Discount Code',
+                                contentPadding: const EdgeInsets.symmetric(
+                                  vertical: 15,
+                                  horizontal: 20,
+                                ),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                  borderSide: BorderSide.none,
+                                ),
+                                filled: true,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: 10),
+                          ElevatedButton(
+                            onPressed: () {
+                              // Implement apply discount logic
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: primaryColor,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              padding: const EdgeInsets.symmetric(
+                                vertical: 15,
+                                horizontal: 20,
+                              ),
+                            ),
+                            child: const Text(
+                              'Apply',
+                              style: TextStyle(
+                                color: Colors.white
+                              ),
+                              ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 16),
+                      // Total Section
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           const Text(
                             'Total:',
                             style: TextStyle(
                               fontSize: 18,
-                              fontWeight: FontWeight.w500,
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
                           Text(
@@ -126,23 +226,26 @@ class CartScreen extends StatelessWidget {
                           ),
                         ],
                       ),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: primaryColor,
-                          padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30),
+                      const SizedBox(height: 20),
+                      // Checkout Button
+                      SizedBox(
+                        width: double.infinity,
+                        child: ElevatedButton(
+                          onPressed: () {},
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: primaryColor,
+                            padding: const EdgeInsets.symmetric(vertical: 15),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30),
+                            ),
                           ),
-                        ),
-                        onPressed: () {
-                          // Tambahkan aksi checkout di sini
-                        },
-                        child: const Text(
-                          'Check Out',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.white
+                          child: const Text(
+                            'Check Out',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
                           ),
                         ),
                       ),

@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:mock_apps/const.dart';
 import 'package:mock_apps/models/products.dart';
+import 'package:mock_apps/state-management/theme_provider.dart';
 import 'package:mock_apps/ui/detail/components/add_to_cart.dart';
 import 'package:mock_apps/ui/detail/components/cart_counter.dart';
 import 'package:mock_apps/ui/detail/components/color_and_size.dart';
 import 'package:mock_apps/ui/detail/components/description.dart';
 import 'package:mock_apps/ui/detail/components/fav_button.dart';
 import 'package:mock_apps/ui/detail/components/product_title.dart';
+import 'package:provider/provider.dart';
 
 class DetailScreen extends StatelessWidget {
   const DetailScreen({super.key, required this.product});
@@ -18,6 +20,8 @@ class DetailScreen extends StatelessWidget {
     int quantity = 1;
 
     final Size size = MediaQuery.of(context).size;
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final isDarkTheme = themeProvider.isDarkTheme;
 
     return Scaffold(
       backgroundColor: product.color,
@@ -26,12 +30,18 @@ class DetailScreen extends StatelessWidget {
         elevation: 0,
         actions: [
           IconButton(
-            icon: const Icon(Icons.favorite_border_outlined),
+            icon: Icon(
+              Icons.favorite_border_outlined,
+              color: isDarkTheme ? Colors.black : Colors.black,
+              ),
             onPressed: () {},
           ),
           IconButton(
             onPressed: () {},
-            icon: const Icon(Icons.shopping_cart_outlined),
+            icon: Icon(
+              Icons.shopping_cart_outlined,
+              color: isDarkTheme ? Colors.black : Colors.black,
+              ),
           ),
         ],
       ),
@@ -50,11 +60,11 @@ class DetailScreen extends StatelessWidget {
                       left: 25,
                       right: defaultPadding,
                     ),
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(24),
-                        topRight: Radius.circular(24),
+                    decoration: BoxDecoration(
+                      color: isDarkTheme ? Colors.black : Colors.white,
+                      borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(50),
+                        topRight: Radius.circular(50),
                       ),
                     ),
                     child: Column(
