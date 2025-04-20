@@ -1,18 +1,38 @@
-# mock_apps
+## 🛍️ Mock App
 
-A new Flutter project.
+A Mobile-based E-Commerce App for Eyewear Sales.
 
-## Getting Started
+![Mockup Mock App](<Mockup_Mock_App.png>)
 
-This project is a starting point for a Flutter application.
+## Features
 
-A few resources to get you started if this is your first Flutter project:
+- **Product Catalog**: Browse eyewear products.
+- **Product Detail Page**: View product details and pricing.
+- **Shopping Cart**: Add and manage items in your cart.
+- **Wishlist**: Save your favorite products.
+- **Dark Mode**: Toggle between light and dark themes.
+- **User Profile**: View and edit basic user info.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Tech Stack
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+**Front-End:**  
+- Dart v3.6.1 (stable)  
+- Flutter v3.27.2 (stable channel)
 
-# testing to add something new 
+**Dependencies:**  
+- **`provider`**: State management solution.
+- **`shared_preferences`**: Local data storage.
+- **`flutter_screenutil`** (optional): Responsive layout support.
+
+## Usage
+
+1. **Browse**: Start exploring the product catalog.
+2. **Add to Cart or Wishlist**: Save what you like.
+3. **Toggle Theme**: Switch between light and dark mode.
+4. **Manage Profile**: Customize your user info.
+
+## 📬 Contact
+
+Developed with 💙 by **Nasya**  
+📧 nasyadzakiyah@gmail.com  
+🌐 [https://github.com/nasyasakhi](https://github.com/nasyasakhi)
